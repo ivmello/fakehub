@@ -1,0 +1,49 @@
+basePath: /api/v1
+definitions:
+  api.LupaPayload:
+    properties:
+      query:
+        type: string
+    type: object
+host: localhost:3000
+info:
+  contact:
+    email: ivmello@gmail.com
+    name: Igor Vieira de Mello
+  description: This is a API for get news from fact checking websites
+  title: Fake Hub
+  version: "1.0"
+paths:
+  /crawl/lupa:
+    post:
+      consumes:
+      - application/json
+      description: search on Agencia Lupa query param sent on body
+      parameters:
+      - description: Query
+        in: body
+        name: query
+        required: true
+        schema:
+          $ref: '#/definitions/api.LupaPayload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema: {}
+        "404":
+          description: Not Found
+          schema: {}
+        "500":
+          description: Internal Server Error
+          schema: {}
+      summary: Agencia Lupa crawler
+      tags:
+      - crawl/lupa
+swagger: "2.0"
